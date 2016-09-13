@@ -14,8 +14,17 @@ Game screen that hold game
 App plan:
     have a collection of score objects, each tracking userid, username (if applicable) and user group (again, if applicable)
         if have user group, only sub to users in the user group
+
     every time user scores 1, update the value in the database (this is going to get really intense if we're expecting an update every ~3 seconds or so)
 
     ensure that stuff gets logged to another collection. Find out what exactly should be logged here
+
+    Users should have a a "group_id" field that tells what group they're in
+        have a collection called groups, where each entry is a list containing the other users in the group?
+        can easily fetch only scores from group by just specifying that the userid field of the score object is in the user id list of the group object
+            https://themeteorchef.com/snippets/mongodb-queries-and-projections/ <-- has info on that
+
+    have config collection that can hold config data
+        number of groups
 
     TODO: How do we deal with payments?
