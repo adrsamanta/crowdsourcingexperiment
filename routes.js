@@ -1,23 +1,26 @@
-if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
-
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
+Router.configure({
+  //TODO add loading template
+    onBeforeAction: function () {
+        if (!Meteor.userId()){
+            this.render('login');
+        }
     }
-  });
+});
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
+
+Router.route('/tutorial', {
+    name: "tutorial"
+});
+
+Router.route('/lobby', function () {
+    let status = experimentStatus.findOne({type: "experimentInProgress"})
+    if (status!=null && status.value){
+        this.render("lateArrival");
     }
-  });
-}
+    else{
+        this.render("lobby");
+    }
+}, {
+    name: "lobby"
+});
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
-}

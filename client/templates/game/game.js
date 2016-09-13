@@ -5,7 +5,7 @@
 Template.game.helpers({
     'incrementScore': function () {
         let user = Meteor.userId();
-        let score = scoreCollection.findOne({userID: user});
+        let score = scoreCollection.findOne({userid: user});
         score.score+=1;
         scoreCollection.update(score.id, {$set: score}, function (error) {
            if (error){

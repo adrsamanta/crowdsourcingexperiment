@@ -19,7 +19,7 @@ App plan:
 
     ensure that stuff gets logged to another collection. Find out what exactly should be logged here
 
-    Users should have a a "group_id" field that tells what group they're in
+
         have a collection called groups, where each entry is a list containing the other users in the group?
         can easily fetch only scores from group by just specifying that the userid field of the score object is in the user id list of the group object
             https://themeteorchef.com/snippets/mongodb-queries-and-projections/ <-- has info on that

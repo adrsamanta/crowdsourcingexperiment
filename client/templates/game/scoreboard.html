@@ -1,0 +1,17 @@
+<template name="scoreboard">
+
+    <div class="row">
+        <h3>Scoreboard: </h3>
+    </div>
+    <div class="row">
+        <ol>
+            {{#each scores}}
+                {{#if myScore}}
+                    <li><strong>YOU:</strong>{{score}}</li>
+                {{else}}
+                    <li>{{score}}</li>
+                {{/if}}
+            {{/each}}
+        </ol>
+    </div>
+</template>
