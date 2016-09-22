@@ -13,8 +13,8 @@ Router.route('/tutorial', {
 });
 
 Router.route('/lobby', function () {
-    let status = experimentStatus.findOne({type: "experimentInProgress"})
-    if (status!=null && status.value){
+    let status = experimentInProgress();
+    if (status){
         this.render("lateArrival");
     }
     else{
