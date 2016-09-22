@@ -5,7 +5,7 @@
 Template.scoreboard.helpers({
     "scores": function () {
         let user = Meteor.user();
-        let userGroup = userGroups.find({users: {$in: [user.id]}});
+        let userGroup = userGroups.find({userids: {$in: [user.id]}});
         let neighbor_users = [];
         userGroup.forEach(function (e) {
             neighbor_users.concat(e.userids);
