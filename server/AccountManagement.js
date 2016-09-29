@@ -64,6 +64,6 @@ Meteor.methods({
 
 
 //exists in case this needs to change later, want it refactored out here
-function getUsersInExperiment(){
+getUsersInExperiment =function(){
     return Meteor.users.find({username: {$ne: "admin"}});
-}
+};

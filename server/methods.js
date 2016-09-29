@@ -12,10 +12,26 @@ Meteor.methods({
     startExperiment: function () {
         if (isAdmin()){
             distributeUsersToGroups();
+            setAllScores(0);
+            experimentStatus.insert({
+                name: "experimentInProgress",
+                value: true
+            });
             //other things to TBD
         }
     }
 });
+
+
+var setAllScores = function (baseScore) {
+    let users = getUsersInExperiment();
+    users.forEach(function (user) {
+        scoreCollection.insert({
+            score: baseScore,
+            userid: user.id
+        });
+    });
+};
 
 
 var distributeUsersToGroups = function () {

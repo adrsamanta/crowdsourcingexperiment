@@ -4,7 +4,9 @@ Router.configure({
         if (!Meteor.userId()){
             this.render('login');
         }
-        this.next();
+        else {
+            this.next();
+        }
     }
 });
 
@@ -18,7 +20,7 @@ Router.route('/tutorial', {
 });
 
 Router.route('/lobby', function () {
-    let status = experimentInProgress();
+    let status = experimentInProgress()
     if (status){
         this.render("lateArrival");
     }
@@ -28,4 +30,6 @@ Router.route('/lobby', function () {
 }, {
     name: "lobby"
 });
+
+Router.route('/game');
 
