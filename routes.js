@@ -4,9 +4,14 @@ Router.configure({
         if (!Meteor.userId()){
             this.render('login');
         }
+        this.next();
     }
 });
 
+Router.route('/', function () {
+    console.log("accessed base route, going to tutorial");
+   Router.go("/tutorial");
+});
 
 Router.route('/tutorial', {
     name: "tutorial"
