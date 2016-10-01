@@ -25,19 +25,20 @@ Meteor.methods({
 
 var setAllScores = function (baseScore) {
     let users = getUsersInExperiment();
+    scoreCollection.remove({});
     users.forEach(function (user) {
         scoreCollection.insert({
             score: baseScore,
-            userid: user.id
+            userid: user._id
         });
     });
 };
 
 
 var distributeUsersToGroups = function () {
-    let users = getUsersInExperiment();
+    let users = getUsersInExperiment().fetch();
     let numGroups = getNumGroups(), usersPerGroup = getUperG();
-    if (users.count!= usersPerGroup*numGroups){
+    if (users.length!= usersPerGroup*numGroups){
         //problem, uneven split
         //TODO log error as needed
         console.log("users do not split evenly into groups!!");
@@ -50,9 +51,10 @@ var distributeUsersToGroups = function () {
     let userI = 0;
     for (let i = 0; i<numGroups; ++i){
         let newUIDs=[];
-        for (let j = 0; j<usersPerGroup && userI<users.count; ++j, ++userI){
-            newUIDs.append(users[userI]);
+        for (let j = 0; j<usersPerGroup && userI<users.length; ++j, ++userI){
+            newUIDs.push(users[userI]._id);
         }
+        console.log("adding user group");
         userGroups.insert({userids: newUIDs});
     }
 };
