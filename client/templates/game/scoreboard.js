@@ -4,14 +4,14 @@
 
 Template.scoreboard.helpers({
     "scores": function () {
-        let user = Meteor.user();
-        let userGroup = userGroups.find({userids: {$in: [user.id]}});
+        let userid = Meteor.userId();
+        let userGroup = userGroups.find({userids: {$in: [userid]}});
         let neighbor_users = [];
         userGroup.forEach(function (e) {
-            neighbor_users.concat(e.userids);
+            neighbor_users = neighbor_users.concat(e.userids);
         });
 
-        return scoreCollection.find({userid: {$in: neighbor_users}});
+        return scoreCollection.find({userid: {$in: neighbor_users}}, {sort: {score: -1}});
     },
     "myScore": function () {
         return this.userid == Meteor.userId();

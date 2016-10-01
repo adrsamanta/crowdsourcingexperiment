@@ -2,17 +2,22 @@
  * Created by alan on 9/13/2016.
  */
 
-Template.game.helpers({
-    'incrementScore': function () {
+Template.game.events({
+    "click #yolobtn"(event) {
         let user = Meteor.userId();
         let score = scoreCollection.findOne({userid: user});
-        score.score+=1;
-        scoreCollection.update(score.id, {$set: score}, function (error) {
-           if (error){
-               alert(error.reason);
-           } else{
-               //no-op
-           }
+        console.log(score._id);
+        let newScore = {
+            score: score.score+1
+        };
+        scoreCollection.update(score._id, {$set: newScore}, function (error) {
+            if (error) {
+                alert(error.reason);
+            } else {
+                console.log("updated");
+            }
         });
     }
+
 });
+
